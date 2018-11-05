@@ -1,0 +1,38 @@
+#!/usr/bin/python
+
+import sys
+
+def main():
+    if len(sys.argv) < 3:
+        print_usage()
+        sys.exit(1)
+    try:
+        base = int(sys.argv[1])
+        num = int(sys.argv[2], base)
+    except:
+        print_usage()
+        sys.exit(1)
+    print_num(num)
+    
+def print_num(num):
+    print "DEC: " + str(num)
+
+    hex_string = "" 
+    rest = num
+    while rest > 0:
+        hex_string = "{0:02X}".format(rest & 0xff) + " " + hex_string
+        rest = rest >> 8
+    print "HEX: " + str.strip(hex_string)
+
+    bin_string = "" 
+    rest = num
+    while rest > 0:
+        bin_string = "{0:08b}".format(rest & 0xff) + " " + bin_string
+        rest = rest >> 8
+    print "BIN: " + str.strip(bin_string)
+
+def print_usage():
+    print "Usage: %s BASE NUM" % sys.argv[0]
+
+if __name__ == "__main__":
+    main()
